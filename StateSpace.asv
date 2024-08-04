@@ -1,0 +1,72 @@
+% 设置参数
+m = 5; % 质量 (kg)
+T = 60; % 仿真时间 (s)
+
+rho = 1.225; % 空气密度 (kg/m^3)
+
+Ax = 0.3; % 迎风面积x (m^2)
+Ay = 0.2; % 迎风面积y (m^2)
+Az = 0.1; % 迎风面积z (m^2)
+
+Cd = 0.4; % 阻力系数
+g = 9.81; % 重力加速度 (m/s^2)
+
+a = 1;
+b = 0.6;
+c = 0.8;
+
+Ix = (1/12) * m * (b^2 + c^2);
+Iy = (1/12) * m * (a^2 + c^2);
+Iz = (1/12) * m * (a^2 + b^2);
+
+L = 3;
+
+% 加载 Simulink 模型
+model = 'simulation01';
+load_system(model);
+
+% 参数块名称
+param_blocks = {'m', 'T', 'rho', 'Ax', 'Ay', 'Az', 'Cd', 'g', 'Ix', 'Iy', 'Iz', 'L'};
+
+% 设置模型参数
+for i = 1:length(param_blocks)
+    block_path = find_system(model, 'SearchDepth', 1, 'BlockType', 'Constant', 'Name', param_blocks{i});
+    if ~isempty(block_path)
+        set_param(block_path{1}, 'Value', num2str(eval(param_blocks{i})));
+    else
+        error(['Block ', param_blocks{i}, ' not found in the model.']);
+    end
+end
+
+% 运行仿真
+simOut = sim(model, 'StopTime', num2str(T));
+
+% 提取仿真结果
+t = simOut.tout;
+position_x = simOut.logsout.getElement('position_x').Values.Data;
+position_y = simOut.logsout.getElement('position_y').Values.Data;
+position_z = simOut.logsout.getElement('position_z').Values.Data;
+
+% 绘制运动状态
+figure;
+subplot(3,1,1);
+plot(t, position_x);
+title('Position in X-axis');
+xlabel('Time (s)');
+ylabel('Position (m)');
+
+subplot(3,1,2);
+plot(t, position_y);
+title('Position in Y-axis');
+xlabel('Time (s)');
+ylabel('Position (m)');
+
+subplot(3,1,3);
+plot(t, position_z);
+title('Position in Z-axis');
+xlabel('Time (s)');
+ylabel('Position (m)');
+
+% 保存图像
+saveas(gcf, 'payload_motion.png');
+
