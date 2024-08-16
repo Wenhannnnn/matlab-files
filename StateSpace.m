@@ -21,6 +21,9 @@ Iz = (1/12) * m * (a^2 + b^2);
 
 L = 5;
 
+K = 1.2;
+
+r = 1;
 % Load Simulink model
 model = 'simulation01';
 load_system(model);
