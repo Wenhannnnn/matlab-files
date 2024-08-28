@@ -39,7 +39,7 @@ ylim([min(y)-0.1, max(y)+0.1]);
 zlim([-10, 1]);
 
 % Animation effect, strictly following coordinate values
-updateInterval = 1000; % Update every 1000 time steps
+updateInterval = 10; % Update every 1000 time steps
 for i = 1:updateInterval:length(time)
     % Update the object's trajectory line
     set(trajectoryHandle, 'XData', x(1:i), 'YData', y(1:i), 'ZData', z(1:i));

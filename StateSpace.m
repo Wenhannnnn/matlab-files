@@ -4,9 +4,9 @@ T = 60; % Simulation time (s)
 
 rho = 1.225; % Air density (kg/m^3)
 
-Ax = 0.3; % Frontal area in x direction (m^2)
-Ay = 0.2; % Frontal area in y direction (m^2)
-Az = 0.1; % Frontal area in z direction (m^2)
+Ax = 0.48; % Frontal area in x direction (m^2)
+Ay = 0.8; % Frontal area in y direction (m^2)
+Az = 0.6; % Frontal area in z direction (m^2)
 
 Cd = 0.4; % Drag coefficient
 g = 9.81; % Gravitational acceleration (m/s^2)
