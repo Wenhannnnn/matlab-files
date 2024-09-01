@@ -12,7 +12,7 @@ rmse_on_middlewind = sqrt(mean(error_x_on_middlewind.^2));     % 计算控制开
 
 % 创建直方图数据，调整顺序以确保5hat在中间
 rmse_data = [rmse_off_middlewind, rmse_on_5hat_middlewind, rmse_on_middlewind];  % 将RMSE值放入数组
-labels = {'Off Middle Wind', 'Limit x5', 'On Middle Wind'};  % 更新后的X轴标签
+labels = {'Off ', 'Limit x5', 'No Limit'};  % 更新后的X轴标签
 
 % 绘制直方图
 figure;
@@ -32,7 +32,7 @@ set(gcf, 'PaperSize', [8 4]);  % 设置PNG文件的页面大小与图表相同
 print(gcf, 'RMSErrorComparison_middlewind_limit_x5.png', '-dpng', '-r300');  % 修改为PNG格式
 
 % 关闭图形窗口（如果不再需要进一步编辑）
-close(gcf);
+
 
 % 计算on_middlewind状态的RMSE是off_middlewind状态RMSE的百分比
 percentage_rmse_on_middlewind = (rmse_on_middlewind / rmse_off_middlewind) * 100;

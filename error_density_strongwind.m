@@ -30,7 +30,10 @@ plot(xi_on_5hat_strongwind, f_on_5hat_strongwind, 'LineWidth', 2, 'LineStyle', '
 xlabel('Error Value', 'FontSize', 12, 'FontWeight', 'bold');  % x轴标签
 ylabel('Density', 'FontSize', 12, 'FontWeight', 'bold');      % y轴标签
 title('Error Density Estimation: Strong Wind Conditions', 'FontSize', 14, 'FontWeight', 'bold');  % 图表标题
-legend('Off Strong Wind', 'Limit x500', 'Limit x5', 'FontSize', 12, 'Location', 'northeastoutside');  % 调整图例位置至图形外部
+
+% 修改图例标注并确保显示
+legend({'Off', 'No Limit', 'Limit x5'}, 'FontSize', 12, 'Location', 'best');  % 使用花括号确保图例显示，位置设置为最佳
+
 set(gca, 'LineWidth', 1.5, 'FontSize', 12);  % 设置坐标轴线宽和字体大小
 grid on;  % 添加网格线
 
@@ -41,9 +44,6 @@ set(gcf, 'PaperSize', [8 4]);  % 设置PNG文件的页面大小与图表相同
 
 % 保存为高质量PNG格式
 print(gcf, 'ErrorDensityEstimation_strongwind_5hat_500hat.png', '-dpng', '-r300');  % 修改为PNG格式
-
-% 关闭图形窗口（如果不再需要进一步编辑）
-
 
 % 计算方差
 var_off_strongwind = var(error_x_off_strongwind);
